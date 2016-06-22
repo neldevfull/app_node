@@ -25,29 +25,33 @@ module.exports = function(app) {
 
     // Busca todos os usuários (SELECT SEM WHERE)
     app.get('/api/user/all', function(request, response) {
-        User.find({}, function(error, results) {
+        User.find({}, function(error, users) {
             if(error) {
                 console.log("Error user all");
                 console.log(error);
                 throw error;
             }
 
-            response.format({
-                json: function() {
-                    response.json(results);
-                }
+            console.log("All users")
+            users.forEach(function(user) {
+                console.log("id: " + user.id + " email: " + user.email);
             });
+
         });
     });
 
     // SELECT WHERE POR ID
     app.get('/api/user/:id', function(request, response) {
-        var userId = request.params.id;
+        var id = request.params.id;
 
-        User.find({id: userId}, function(error, user) {
+        User.find({id: id}, function(error, user) {
             if(error) console.log(error);
 
-            console.log("id: " + user[0].id + " email: " + user[0].email);
+            User.findById(user[0]._id, function(error, user) {
+                if(error) console.log(error);
+
+                console.log("id: " + user.id + " email: " + user.email);
+            });
         });
     });
 }
