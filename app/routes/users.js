@@ -2,28 +2,28 @@ var User = require('../models/user')();
 
 module.exports = function(app) {
 
-    // Renderiza index, exemplo com navegador
+    // Rendering index, example with browser
     app.get('/', function(request, response) {
         response.render('index');
     });
 
-    // Salva o usuário (INSERT)
-    app.post('/api/user/save', function(request, response) {
+    // SAVE the user (INSERT)
+    app.post('/api/user', function(request, response) {
         var body = request.body;
 
         var newUser = new User(body);
 
         newUser.save(function(error, user) {
             if(error) {
-                console.log("Error save user");
+                console.log('Error save user');
                 throw error;
             }
 
-            console.log("Save user" + user);
+            console.log('Saved user \n' + user);
         });
     });
 
-    // Busca todos os usuários (SELECT SEM WHERE)
+    // Fetch all users (SELECT SEM WHERE)
     app.get('/api/user/all', function(request, response) {
         User.find({}, function(error, users) {
             if(error) {
@@ -32,15 +32,14 @@ module.exports = function(app) {
                 throw error;
             }
 
-            console.log("All users")
+            console.log('All users')
             users.forEach(function(user) {
-                console.log("id: " + user.id + " email: " + user.email);
+                console.log('id: ' + user.id + ' email: ' + user.email);
             });
-
         });
     });
 
-    // SELECT WHERE POR ID
+    // GET, Similar to a SELECT WHERE FOR ID
     app.get('/api/user/:id', function(request, response) {
         var id = request.params.id;
 
@@ -50,8 +49,30 @@ module.exports = function(app) {
             User.findById(user[0]._id, function(error, user) {
                 if(error) console.log(error);
 
-                console.log("id: " + user.id + " email: " + user.email);
+                console.log('id: ' + user.id + ' email: ' + user.email);
             });
+        });
+    });
+
+    // UPDATE, first fetch by id, after update user
+    app.put('/api/user', function(request, response) {
+        var body = request.body;;
+
+        User.find({id: body.id}, function(error, user) {
+            User.findByIdAndUpdate(user[0]._id, body, function() {
+                console.log('Updated successfully!');
+            })
+        });
+    });
+
+    // DELETE, first fetch by id, after update user
+    app.delete('/api/user', function(request, response) {
+        var body = request.body;;
+
+        User.find({id: body.id}, function(error, user) {
+            User.findByIdAndRemove(user[0]._id, body, function() {
+                console.log('Deleted user '+ body.id + ' successfully!');
+            })
         });
     });
 }
