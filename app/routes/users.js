@@ -65,7 +65,7 @@ module.exports = function(app) {
         });
     });
 
-    // DELETE, first fetch by id, after update user
+    // DELETE, first fetch by id, after delete user
     app.delete('/api/user', function(request, response) {
         var body = request.body;;
 
