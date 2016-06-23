@@ -1,6 +1,4 @@
-var User = require('../models/user')();
-
-module.exports = function(app) {
+module.exports = function(app, User) {
 
     // Rendering index, example with browser
     app.get('/', function(request, response) {
