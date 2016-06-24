@@ -5,7 +5,7 @@ module.exports = function() {
 
     var customer = Schema({
         id: String,
-        name: String,
+        fullname: String,
         address: String,
         rg: String,
         cpf: String

@@ -54,7 +54,7 @@ module.exports = function(app, User) {
 
     // UPDATE, first fetch by id, after update user
     app.put('/api/user', function(request, response) {
-        var body = request.body;;
+        var body = request.body;
 
         User.find({id: body.id}, function(error, user) {
             User.findByIdAndUpdate(user[0]._id, body, function() {
@@ -65,7 +65,7 @@ module.exports = function(app, User) {
 
     // DELETE, first fetch by id, after delete user
     app.delete('/api/user', function(request, response) {
-        var body = request.body;;
+        var body = request.body;
 
         User.find({id: body.id}, function(error, user) {
             User.findByIdAndRemove(user[0]._id, body, function() {

@@ -27,7 +27,7 @@ module.exports = function(app, Customer) {
 
             console.log('All customers')
             customers.forEach(function(customer) {
-                console.log('id: ' + customer.id + ' email: ' + customer.name +
+                console.log('id: ' + customer.id + ' name: ' + customer.name +
                     ' address: ' + customer.address + ' RG: ' + customer.rg +
                     ' CPF: ' + customer.cpf);
             });
@@ -44,7 +44,7 @@ module.exports = function(app, Customer) {
             Customer.findById(customer[0]._id, function(error, customer) {
                 if(error) console.log(error);
 
-                console.log('id: ' + customer.id + ' email: ' + customer.name +
+                console.log('id: ' + customer.id + ' name: ' + customer.name +
                     ' address: ' + customer.address + ' RG: ' + customer.rg +
                     ' CPF: ' + customer.cpf);
             });
