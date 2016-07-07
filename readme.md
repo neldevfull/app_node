@@ -6,7 +6,7 @@
 ## How to test the API with Curl ?
 
 ### POST
-* curl --data "id=3&email=maria@hotmail.com&password=123456" http://localhost:3000/api/user
+* curl -H "Content-Type: application/json" -X POST -d '{"id":"3","email":"maria@hotmail.com","password":"123456"}' http://localhost:3000/api/user
 
 ### GET
 * curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:3000/api/user/all
